@@ -16,6 +16,30 @@ total_lives = 3
 # essentially, boolians are equivalent to an on or off switch, 1 or 0.
 player_choice = False
 
+#define a win or lose function
+def winorlose(status):
+	#version 1 of function
+	# print("Inside winorlose function; status is: ", status)
+	print("You", status, "! Would you like to play again?")
+	choice = input ("Y / N? ")
+
+	if choice == "N" or choice == "n":
+		print("You chose to quit! Better luck next time!")
+		exit()
+	elif choice == "Y" or choice == "y":
+		#reset the player lives and computer lives
+		#and reset player choice to False, so our loop restarts
+		global player_lives
+		global computer_lives
+		global total_lives
+
+		player_lives = total_lives
+		computer_lives = total_lives
+	else:
+		print("Make a valid choice - Y or N")
+		#this might generate a bug that we need to fix later
+		choice = input("Y / N? ")
+
 # player_choice == Flase
 while player_choice is False: 
 	# Version 1, to explain array indexing
@@ -37,7 +61,7 @@ while player_choice is False:
 
 	elif computer_choice == "rock":
 		if player_choice == "scissors":
-			print("you lose!")
+			print("you los!")
 			#verbose way
 			# player_lives = player_lives -1
 			#simplified way
@@ -63,38 +87,11 @@ while player_choice is False:
 			computer_lives -= 1
 
 	if player_lives == 0:
-		print("you lose! Would you like to play again?")
-		choice = input("Y / N? ")
-
-		if choice == "N" or choice == "n":
-			print("You chose to quit! Better luck next time!")
-			exit()
-		elif choice == "Y" or choice == "y":
-			#reset the player lives and computer lives
-			#and reset player choice to False, so out loop restarts
-			player_lives = total_lives
-			computer_lives = total_lives
-		else:
-			print("Make a valid choice - Y or N")
-			#this might generate a bug that we need to fix later
-			choice = input("Y / N? ")
-
+		winorlose("lose")
+		
 	if computer_lives == 0:
-		print("you win! Would you like to play again?")
-		choice = input ("Y / N? ")
-
-		if choice == "N" or choice == "n":
-			print("You chose to quit! Better luck next time!")
-			exit()
-		elif choice == "Y" or choice == "y":
-			#reset the player lives and computer lives
-			#and reset player choice to False, so our loop restarts
-			player_lives = total_lives
-			computer_lives = total_lives
-		else:
-			print("Make a valid choice - Y or N")
-			#this might generate a bug that we need to fix later
-			choice = input("Y / N? ")
+		winorlose("won")
+		
 		
 	print("Player lives:", player_lives)
 	print("Computer lives:", computer_lives)
